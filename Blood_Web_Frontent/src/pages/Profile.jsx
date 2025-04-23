@@ -10,6 +10,8 @@ import { receiveMessage } from '../config/Socket';
 import BlockInterface from '../components/BlockInterface';
 import Animate from '../components/Animate';
 import { MdVerified } from "react-icons/md";
+import DonarStricks from '../components/DonarStricks';
+
 const Profile = () => {
   const { user, setUser } = useContext(UserContext);
   const [userDets, setUserDets] = useState(user);
@@ -174,12 +176,11 @@ const Profile = () => {
                   return getDateTime(b) - getDateTime(a);
                 })
                 .map((item, index) => (
-                  <Stricks
+                  <DonarStricks
                     key={index}
                     bloodGroup={item.bloodType}
                     date={item.date}
                     time={item.time}
-                    status={item.status}
                     id={item._id}
                   />
                 ))}

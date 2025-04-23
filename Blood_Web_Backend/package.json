@@ -19,6 +19,7 @@
     "express-session": "^1.18.1",
     "express-validator": "^7.2.1",
     "flash": "^1.1.0",
+    "fontkit": "^2.0.4",
     "google-auth-library": "^9.15.1",
     "helmet": "^8.1.0",
     "http-errors": "~2.0.0",
@@ -32,6 +33,7 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^8.0.0",
     "path": "^0.12.7",
+    "pdf-lib": "^1.17.1",
     "socket.io": "^4.8.1",
     "uuid": "^11.1.0"
   }

@@ -9,7 +9,7 @@ const Animate = ({ children }) => {
     const sequence = async () => {
       await overlayControls.start({
         y: "-100%",
-        transition: { ease: "easeIn", duration: 0.5, type: "circIn" },
+        transition: { duration: 0.3, type: "circIn" },
       });
 
       await contentControls.start("animate");
@@ -27,7 +27,7 @@ const Animate = ({ children }) => {
   return (
     <>
       <motion.div
-        className="w-full h-screen bg-white/70 fixed top-0 left-0 z-50"
+        className="w-full h-screen bg-white/30 fixed top-0 left-0 z-50"
         initial={{ y: 0 }}
         animate={overlayControls}
       />

@@ -3,6 +3,7 @@ const app = express();
 const createError = require("http-errors");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const path = require("path");
 const session = require("express-session");
 const passport = require("passport");
 const flash = require("connect-flash");
@@ -16,6 +17,7 @@ const usersRouter = require("./routes/users.router");
 const googleAuthenticatorRouter = require("./routes/googleAuthenticator.router");
 const miantanRouter = require("./routes/maintainers.router");
 const donarRouter = require("./routes/donate.router");
+const pdfGenerator = require("./routes/pdfGenarator");
 
 // Import Database Connection
 const connectWithRetry = require("./config/mongoose-connection");
@@ -60,20 +62,20 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: process.env.NODE_ENV === "production", // Only use 'secure' cookie in production
-      httpOnly: true, // Prevents JavaScript access to cookies
+      secure: process.env.NODE_ENV === "production",
+      httpOnly: true,
     },
   })
 );
 
 // Passport Setup
 passport.serializeUser((user, done) => {
-  done(null, user.id); // Store user ID in session
+  done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await userModel.findById(id); // Fetch user from DB by ID
+    const user = await userModel.findById(id);
     done(null, user);
   } catch (err) {
     done(err, null);
@@ -81,6 +83,7 @@ passport.deserializeUser(async (id, done) => {
 });
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 // Flash Messages Setup
 app.use(flash());
@@ -102,6 +105,7 @@ app.use(
   googleAuthenticatorRouter
 );
 app.use(process.env.MAINTAINERES || "/maintainers", miantanRouter);
+app.use("/pdf", pdfGenerator);
 
 // 404 Handler
 app.use((req, res, next) => {

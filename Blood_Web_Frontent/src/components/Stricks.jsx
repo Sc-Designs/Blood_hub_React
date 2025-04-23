@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { receiveMessage, sendMessage } from '../config/Socket';
 import { UserContext } from '../context/user.context';
 import { useNavigate } from 'react-router-dom';
+import PdfDownloader from './PdfDownloader';
 const Stricks = ({bloodGroup, date, time, status, id}) => {
   const {setUser} = useContext(UserContext);
   const navigator = useNavigate()
@@ -30,11 +31,14 @@ const Stricks = ({bloodGroup, date, time, status, id}) => {
           Delete
         </button>
       ) : (
-        <button
-          onClick={() => navigator(`/map/${id}`)}
-          className="w-full py-2 font-Satoshi uppercase text-xl font-semibold rounded bg-sky-400 drop-shadow-[0px_0px_20px_rgba(0,208,255,0.9)]">
-          Map
-        </button>
+        <div className="flex gap-x-2">
+          <button
+            onClick={() => navigator(`/map/${id}`)}
+            className="w-full py-2 font-Satoshi uppercase text-xl font-semibold rounded bg-sky-400 drop-shadow-[0px_0px_20px_rgba(0,208,255,0.9)] cursor-pointer hover:bg-sky-500 transition-all duration-200">
+            Map
+          </button>
+          <PdfDownloader id={id} />
+        </div>
       )}
     </div>
   );
