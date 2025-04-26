@@ -14,8 +14,7 @@ module.exports = async (req, res, next) => {
         const decoded = jwt.verify(token, process.env.JWT_KEY);
         const admin = await adminModel.findOne({email: decoded.email});
         if (!admin) {
-            res.clearCookie("adminToken");
-            return res.status(404).redirect("/admin/login");
+            return res.status(200).json("Unauthorized Admin!")
         }
         req.admin = admin;
         next();

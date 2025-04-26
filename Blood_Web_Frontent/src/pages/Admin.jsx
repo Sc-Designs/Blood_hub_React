@@ -47,7 +47,7 @@ const Admin = () => {
           { link: "/donate/request-list", name: "Donate" },
           { link: "/reciver/blood", name: "Blood" },
           { link: "/about", name: "About" },
-          { link: "/", name: "Logout" },
+          { link: "/adminLogout", name: "Logout" },
         ]}
       />
       <div className="pt-20 text-white px-6 lg:px-10 pb-5 flex flex-col gap-y-5">

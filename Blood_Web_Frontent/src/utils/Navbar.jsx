@@ -1,9 +1,10 @@
 import React, {useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { TbMenu } from "react-icons/tb";
 import { CgCloseR } from "react-icons/cg";
 const Navbar = ({ field }) => {
   const [sidenav, setSidenav] = useState(false);
+  const navigate = useNavigate();
   const ref = useRef();
   useEffect(() => {
     if (!ref.current) return;
@@ -16,9 +17,14 @@ const Navbar = ({ field }) => {
       ref.current.classList.add("left-[100%]");
     }
   }, [sidenav]);
-  const handelLogOut = ()=>{
-    localStorage.removeItem("userToken");
-    window.location.reload();
+  const handelLogOut = ({link})=>{
+    if(link == "/adminLogout"){
+      localStorage.removeItem("adminToken");
+      navigate("/admin/login");
+    } else {
+      localStorage.removeItem("userToken");
+      navigate("/login")
+    }
   }
   return (
     <div className="w-full pr-5 lg:pr-20 py-4 flex justify-end backdrop-blur-sm fixed top-0 z-40">
@@ -32,9 +38,9 @@ const Navbar = ({ field }) => {
             );
           } else {
             return (
-              <Link onClick={()=> handelLogOut()} key={index} to={item.link}>
+              <button onClick={()=> handelLogOut({link: item.link})} key={index}>
                 Logout
-              </Link>
+              </button>
             );
           }
         })}
@@ -58,9 +64,11 @@ const Navbar = ({ field }) => {
             );
           } else {
             return (
-              <a key={index} href={item.link}>
+              <button
+                onClick={() => handelLogOut({ link: item.link })}
+                key={index}>
                 Logout
-              </a>
+              </button>
             );
           }
         })}

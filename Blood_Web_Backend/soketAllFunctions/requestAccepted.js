@@ -43,10 +43,6 @@ module.exports.requestAccepted = async ({ data, userSockets }) => {
     const filteredPosts = allPendingPosts.filter(
       (item) => item.reciventId?._id.toString() !== donarId.toString()
     );
-    console.log(
-      `📊 Filtered Posts (after removing donor’s request):`,
-      filteredPosts
-    );
 
     filteredPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
 

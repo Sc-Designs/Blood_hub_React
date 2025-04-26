@@ -58,8 +58,12 @@ const AddRequest = () => {
             className="flex flex-col gap-y-5 w-full"
             onSubmit={handleSubmit(submitFrom)}>
             <select
-            id='selection'
-              {...register("bloodGroup", { required: true })}
+              id="selection"
+              {...register("bloodGroup", {
+                required: "Please select a blood group",
+                validate: (value) =>
+                  value !== "default" || "Please select a valid blood group",
+              })}
               className="bg-zinc-800 w-full text-white text-xl font-Satoshi py-4 px-4 rounded-lg border-2 border-gray-500 outline-none">
               <option value="default">Select Blood Group</option>
               <option value="A+">A+</option>
@@ -81,7 +85,7 @@ const AddRequest = () => {
             )}
 
             <input
-            id='number'
+              id="number"
               type="number"
               placeholder="Enter Number"
               {...register("number", { required: true, minLength: 10 })}

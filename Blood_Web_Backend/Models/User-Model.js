@@ -52,17 +52,8 @@ const userSchema = new mongoose.Schema(
       default: false,
     },
     emergencycontact: {
-      number: {
-        type: String,
-        default: null,
-        validate: {
-          validator: function (v) {
-            return !v || /^[0-9]{10}$/.test(v);
-          },
-          message: "Phone number is not valid!",
-        },
-        required: false,
-      },
+      type: Number,
+      default: null,
     },
     bloodgroup: {
       type: String,
@@ -75,11 +66,6 @@ const userSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      default: null,
-      select: false,
-    },
-    age: {
-      type: Number,
       default: null,
       select: false,
     },
@@ -114,6 +100,10 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    number: {
+      type: Number,
+      default: null
+    }
   },
   { timestamps: true }
 );

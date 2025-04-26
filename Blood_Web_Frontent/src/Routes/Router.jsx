@@ -22,78 +22,30 @@ import TicketRaiser from "../pages/TicketRaiser";
 const AllRouter = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/admin"
-          element={
-            <AdminAuth>
-              <Admin />
-            </AdminAuth>
-          }
-        />
-        <Route
-          path="/ticket-raiser"
-          element={
-            <AdminAuth>
-              <TicketRaiser />
-            </AdminAuth>
-          }
-        />
-        <Route
-          path="/allUsers"
-          element={
-            <AdminAuth>
-              <SeeAllUsers />
-            </AdminAuth>
-          }
-        />
-        <Route path="/maintanence" element={<Maintanence />} />
-
+          <Routes>
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<AdminAuth><Admin /></AdminAuth>}/>
+          <Route path="/ticket-raiser" element={<AdminAuth><TicketRaiser /></AdminAuth>}/>
+          <Route path="/allUsers" element={<AdminAuth><SeeAllUsers /></AdminAuth>}/>
+          <Route path="/maintanence" element={<Maintanence />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/otp" element={<Otp />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/about" element={<About />} />
         <Route
           path="/*"
           element={
             <ProtectedRoute>
-              <Routes>
-                <Route path="/otp" element={<Otp />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/map/:id" element={<MapView />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/about" element={<About />} />
-                <Route
-                  path="/users/profile"
-                  element={
-                    <UserAuth>
-                      <Profile />
-                    </UserAuth>
-                  }
-                />
-                <Route
-                  path="/users/contactUs"
-                  element={
-                    <UserAuth>
-                      <ContactUs />
-                    </UserAuth>
-                  }
-                />
-                <Route
-                  path="/reciver/blood"
-                  element={
-                    <UserAuth>
-                      <Blood />
-                    </UserAuth>
-                  }
-                />
-                <Route
-                  path="/donate/request-list"
-                  element={
-                    <UserAuth>
-                      <Donate />
-                    </UserAuth>
-                  }
-                />
-              </Routes>
+              <UserAuth>
+                <Routes>
+                  <Route path="/users/profile" element={<Profile />} />
+                  <Route path="/map/:id" element={<MapView />} />
+                  <Route path="/users/contactUs" element={<ContactUs />} />
+                  <Route path="/reciver/blood" element={<Blood />} />
+                  <Route path="/donate/request-list" element={<Donate />} />
+                </Routes>
+              </UserAuth>
             </ProtectedRoute>
           }
         />

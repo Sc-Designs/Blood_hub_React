@@ -11,11 +11,13 @@ import BlockInterface from '../components/BlockInterface';
 import Animate from '../components/Animate';
 import { MdVerified } from "react-icons/md";
 import DonarStricks from '../components/DonarStricks';
+import Form from "../components/Form"
 
 const Profile = () => {
   const { user, setUser } = useContext(UserContext);
   const [userDets, setUserDets] = useState(user);
   const [picModal, setPicModal] = useState(false);
+  const [formModal, setFormModal] = useState(false);
   
   useEffect(()=>{
     receiveMessage("allPost",(data)=>{
@@ -38,8 +40,17 @@ const Profile = () => {
       setUserDets(user)
   },[user])
 
+  useEffect(() => {
+    if (userDets?.number === null) {
+      setFormModal(true);
+    }
+  }, [userDets?.number]);
+
   return (
     <Animate>
+      {formModal &&
+        <Form fn={setFormModal} />
+      }
       <div className="bg-zinc-900/70 w-full h-fit text-white">
         <Navbar
           field={[

@@ -124,7 +124,6 @@ module.exports.uploadProfilePic = async (req, res) => {
   }
 };
 
-
 module.exports.GetProfile = async ( req,res ) => {
   return res.status(200).json({ user: req.user });
 };
@@ -188,3 +187,38 @@ module.exports.reSendOtp = async (req, res) => {
     console.log(err);
   }
 };
+
+module.exports.alldets = async (req,res) => {
+  try{
+    const {
+      number,
+      emargencyNumber,
+      dob,
+      weight,
+      height,
+      address,
+      gender,
+      bloodGroup,
+    } = req.body;
+    const user = req.user;
+    const validUser = await userFinder({
+      key:"_id",
+      query: user._id,
+      includePopulate:true
+    })
+    if(!validUser) return res.status(404).json("Unauthorized Access!");
+    validUser.number = number;
+    validUser.emergencycontact = emargencyNumber;
+    validUser.dob = dob;
+    validUser.dateOfBirth = dob;
+    validUser.gender = gender;
+    validUser.weight = weight;
+    validUser.height = height;
+    validUser.address = address;
+    validUser.bloodgroup = bloodGroup;
+    await validUser.save();
+    return res.status(200).json(validUser);
+  }catch(err){
+    console.log(err);
+  }
+}
